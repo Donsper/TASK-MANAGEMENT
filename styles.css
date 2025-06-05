@@ -6,17 +6,22 @@ body {
     text-align: center;
     margin: 40px;
     background: linear-gradient(135deg, #ff0d15, #ffa408);
+    min-height: 100vh;
+    padding: 20px;
+
 }
 
 /* Container */
 .container {
-    max-width: 700px;
-    margin: auto;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-    border-radius: 12px;
-    transition: 0.3s ease-in-out;
+    
+    
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
     
 }
 
@@ -35,10 +40,12 @@ input {
     outline: none;
     font-size: 16px;
     transition: 0.2s;
+
+    
 }
 
 input:focus {
-    border-color: #ff758c;
+    border-color: #ff0d15;
 }
 
 /* Buttons */
@@ -55,16 +62,21 @@ button {
 }
 
 button:hover {
-    background-color: #218838;
     transform: scale(1.05);
 }
 
 /* Task List */
 ul {
     list-style: none;
-    padding: 0;
+    padding: 15px;
     margin-top: 15px;
-     display: flex;
+    display: flex;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    
+    
 }
 
 li {
@@ -88,6 +100,8 @@ li:hover {
 small {
     color: #6c757d;
     font-size: 12px;
+
+    
 }
 
 /* Delete & Edit Buttons */
@@ -96,13 +110,17 @@ li button {
     padding: 7px 12px;
     font-size: 12px;
     border-radius: 8px;
+    color: white;
+
 }
 
 li button:first-of-type {
-    background-color: #ffc107;
+    background-color: #dbdbdb;
+    color: rgb(97, 97, 97);
 }
 
 li button:hover {
+    background: linear-gradient(135deg, #ff0d15, #ffa408);
     opacity: 0.8;
 }
 
@@ -117,11 +135,13 @@ li {
     border-radius: 8px;
     box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.15);
     transition: 0.3s;
+    padding: 20px;
+    min-height: 50px;
 }
 
 .task-text {
-    flex-grow: 1;
-    padding: 6px;
+    flex-grow: 5;
+    padding: 5px;
     font-size: 16px;
     cursor: text;
     border-radius: 5px;
@@ -140,4 +160,16 @@ button {
     border-radius: 6px;
     cursor: pointer;
     transition: 0.3s;
+}
+
+#taskCount {
+    font-size: 18px;
+    font-weight: bold;
+    color: #343a40;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    margin-top: 10px;
 }

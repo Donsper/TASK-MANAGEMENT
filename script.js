@@ -1,21 +1,11 @@
 document.addEventListener("DOMContentLoaded", loadTasks);
 
-function addTask() {
-    let taskInput = document.getElementById("taskInput");
-    let taskText = taskInput.value.trim();
-    
-    if (taskText === "") return;
-
+function updateTaskCount() {
     let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    let newTask = { text: taskText, date: new Date().toLocaleString() };
-    
-    tasks.push(newTask);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-
-    taskInput.value = "";
-    loadTasks();
+    document.getElementById("taskCount").innerText = `Total Tasks: ${tasks.length}`;
 }
 
+// Modify loadTasks() to call updateTaskCount()
 function loadTasks() {
     let taskList = document.getElementById("taskList");
     taskList.innerHTML = "";
@@ -27,27 +17,29 @@ function loadTasks() {
         li.innerHTML = `
             <span class="task-text" contenteditable="false">${task.text}</span>
             <small>${task.date}</small>
-            <button onclick="enableEdit(${index})">✏️ Edit</button>
-            <button onclick="deleteTask(${index})">❌ Delete</button>`;
+            <button onclick="enableEdit(${index})">Edit</button>
+            <button onclick="deleteTask(${index})">Delete</button>`;
         taskList.appendChild(li);
     });
+
+    updateTaskCount();
 }
 
-function enableEdit(index) {
+// Modify addTask() and deleteTask() to call updateTaskCount()
+function addTask() {
+    let taskInput = document.getElementById("taskInput");
+    let taskText = taskInput.value.trim();
+
+    if (taskText === "") return;
+
     let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    let taskList = document.getElementById("taskList");
-    let taskText = taskList.children[index].querySelector(".task-text");
+    let newTask = { text: taskText, date: new Date().toLocaleString() };
 
-    taskText.contentEditable = "true";
-    taskText.focus();
+    tasks.push(newTask);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
 
-    taskText.addEventListener("blur", function () {
-        tasks[index].text = taskText.innerText.trim();
-        tasks[index].date = new Date().toLocaleString();
-        localStorage.setItem("tasks", JSON.stringify(tasks));
-        taskText.contentEditable = "false";
-        loadTasks();
-    });
+    taskInput.value = "";
+    loadTasks();
 }
 
 function deleteTask(index) {
