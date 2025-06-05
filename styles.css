@@ -173,3 +173,25 @@ button {
     display: inline-block;
     margin-top: 10px;
 }
+
+#completedTaskList {
+    margin-top: 20px;
+}
+
+#completedTaskList li {
+    background: rgba(40, 167, 69, 0.2);
+    border: 1px solid #28a745;
+    color: #155724;
+    
+}
+#completedTaskCount {
+    font-size: 18px;
+    font-weight: bold;
+    color: #343a40;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    margin-top: 10px;
+}
