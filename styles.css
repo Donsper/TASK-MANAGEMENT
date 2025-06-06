@@ -125,6 +125,8 @@ li button {
     font-size: 12px;
     border-radius: 8px;
     color: white;
+    margin-right: 8px;
+    margin-left: 8px;
 
 }
 
@@ -209,6 +211,15 @@ button {
     display: inline-block;
     margin-top: 10px;
 }
+
+.date-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  line-height: 1; 
+ } 
 
 /* Task animations */
 @keyframes fadeIn {

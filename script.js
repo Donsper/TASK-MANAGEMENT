@@ -27,8 +27,10 @@ function loadTasks() {
     li.setAttribute("data-index", index);
     li.innerHTML = `
         <span class="task-text">${task.text}</span>
+        <div class="date-info">
         <small>Created: ${task.dateCreated}</small><br>
         <small>Due: ${task.dueDate}</small>
+        </div>
         <button onclick="enableEdit(${index})"><i class="fas fa-edit"></i>Edit</button>
         <button onclick="completeTask(${index})"><i class="fas fa-check"></i>Complete</button>
         <button onclick="deleteTask(${index})"><i class="fas fa-trash"></i>Delete</button>`;
@@ -49,9 +51,11 @@ function loadTasks() {
     li.classList.add("fade-in"); 
     li.innerHTML = `
         <span class="task-text">${task.text}</span>
+        <div class="date-info">
         <small>Created: ${task.dateCreated}</small><br>
         <small>Due: ${task.dueDate}</small><br>
         <small>Completed: ${task.completedDate || "Not recorded"}</small>
+        </div>
         <button onclick="deleteCompletedTask(${index})">Remove</button>`;
     completedTaskList.appendChild(li);
 });
