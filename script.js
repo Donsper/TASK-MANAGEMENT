@@ -20,6 +20,20 @@ function loadTasks() {
 
     let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
     let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
+    let sortOption = document.getElementById("sortOption")?.value || "newest";
+
+    tasks.sort((a, b) => {
+    const dateA = new Date(a.dateCreated);
+    const dateB = new Date(b.dateCreated);
+    const dueA = new Date(a.dueDate);
+    const dueB = new Date(b.dueDate);
+
+    if (sortOption === "oldest") return dateA - dateB;
+    if (sortOption === "dueSoon") return dueA - dueB;
+    return dateB - dateA; // default to newest
+
+    });
+
 
   tasks.forEach((task, index) => {
     let li = document.createElement("li");
@@ -62,6 +76,12 @@ function loadTasks() {
 
 
     updateTaskCounts();
+
+    document.getElementById("emptyTaskMessage").style.display =
+    tasks.length === 0 ? "block" : "none";
+
+    document.getElementById("emptyCompletedMessage").style.display =
+    completedTasks.length === 0 ? "block" : "none";
 }
 
 
@@ -78,9 +98,8 @@ function completeTask(index) {
     localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
 
     loadTasks();
+    
 }
-
-
 
 function deleteCompletedTask(index) {
     let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
@@ -95,6 +114,7 @@ function addTask() {
     let dueDateInput = document.getElementById("dueDateInput");
     let taskText = taskInput.value.trim();
     let dueDate = dueDateInput.value;
+    
 
     if (taskText === "") return;
 
@@ -102,7 +122,7 @@ function addTask() {
     let newTask = {
         text: taskText,
         dateCreated: new Date().toLocaleString(),
-        dueDate: dueDate ? new Date(dueDate).toLocaleDateString() : "No due date"
+        dueDate: dueDate ? new Date(dueDate).toLocaleDateString() : "No due date",
     };
 
     tasks.push(newTask);

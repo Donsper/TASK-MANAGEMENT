@@ -21,8 +21,15 @@
         </div>
         <div class="con-task">
             <h1>List of Task</h1>
+             <select id="sortOption" onchange="loadTasks()">
+            <option value="newest">Sort by Newest</option>
+            <option value="oldest">Sort by Oldest</option>
+            <option value="dueSoon">Sort by Due Date</option>
+            </select>
             <ul id="taskList"></ul>
             <p id="taskCount">Total Tasks: 0</p>
+            <p id="emptyTaskMessage" style="display: none;">🎉 No tasks yet! Add one above to get started.</p>
+            <p id="emptyCompletedMessage" style="display: none;">✅ No completed tasks yet. Mark tasks as done to see them here!</p>
             <button onclick="clearAllTasks()">Delete All</button>
         </div>
         

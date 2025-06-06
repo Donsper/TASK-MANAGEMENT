@@ -17,13 +17,14 @@ body {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     backdrop-filter: blur(10px);   
+    margin-bottom: 1rem;
 }
 .title h1{
     color: rgb(255, 255, 255);
 }
 /* Container */
 .container {
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 0 auto;
     background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
@@ -32,7 +33,7 @@ body {
     backdrop-filter: blur(10px);   
 }
 .con-task{
-    max-width: 1110px;
+    max-width: 1280px;
     margin: 0 auto;
     background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
@@ -195,7 +196,7 @@ li {
 
 button {
     padding: 8px;
-    border-radius: 6px;
+    border-radius: 7px;
     cursor: pointer;
     transition: 0.3s;
 }
@@ -232,6 +233,35 @@ button {
     box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.1);
     display: inline-block;
     margin-top: 10px;
+}
+
+#sortOption {
+  padding: 12px 16px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 2px solid #ced4da;
+  background: white;
+  color: #343a40;
+  cursor: pointer;
+  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.1);
+  transition: border 0.3s ease, background 0.3s ease;
+  margin-bottom: 20px;
+}
+
+#sortOption:hover {
+  border-color: #2575fc;
+  background: linear-gradient(135deg, #e581e5, #9f0fff);
+}
+
+body.dark-mode #sortOption {
+  background-color: #2b2b2b;
+  color: #ffffff;
+  border-color: #555;
+}
+
+body.dark-mode #sortOption:hover {
+  background-color: #3a3a3a;
+  border-color: #888;
 }
 
 .date-info {
