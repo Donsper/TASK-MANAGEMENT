@@ -5,12 +5,22 @@ body {
     font-family: 'Poppins', sans-serif;
     text-align: center;
     margin: 40px;
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    background: linear-gradient(135deg, #f9b3f9, #9538ff);
     min-height: 100vh;
     padding: 20px;
-
+    /*#9538ff*/
 }
-
+.title{
+    max-width: 1200px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #9538ff, #f9b3f9);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    backdrop-filter: blur(10px);   
+}
+.title h1{
+    color: rgb(255, 255, 255);
+}
 /* Container */
 .container {
     max-width: 1200px;
@@ -20,6 +30,15 @@ body {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     backdrop-filter: blur(10px);   
+}
+.con-task{
+    max-width: 1110px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
 }
 
 .input-group {
@@ -36,7 +55,7 @@ body {
 
 .input-group button {
     width: auto;
-    padding: 12px 24px;
+    padding: 10px 24px;
 }
 
 h1 {
@@ -54,18 +73,17 @@ input {
     outline: none;
     font-size: 16px;
     transition: 0.2s;
-
     
 }
 
 input:focus {
-    border-color: #ff0d15;
+    border-color: #e581e5
 }
 
 /* Buttons */
 button {
     padding: 12px;
-    background-color: #4CAF50;
+    background: linear-gradient(135deg, #949494, #3a3a3a);
     color: white;
     border: none;
     border-radius: 8px;
@@ -77,6 +95,9 @@ button {
 
 button:hover {
     transform: scale(1.05);
+    background: linear-gradient(135deg, #e581e5, #9f0fff);
+    color: rgb(255, 255, 255);
+    opacity: 0.9;
 }
 
 /* Task List */
@@ -120,23 +141,24 @@ small {
 
 /* Delete & Edit Buttons */
 li button {
-    background-color: #dc3545;
+    background-color: #000000;
     padding: 7px 12px;
     font-size: 12px;
     border-radius: 8px;
-    color: white;
-    margin-right: 8px;
-    margin-left: 8px;
+    color: rgb(255, 255, 255);
+    margin-right: 5px;
+    margin-left: 5px;
 
 }
 
 li button:first-of-type {
-    background-color: #dbdbdb;
-    color: rgb(97, 97, 97);
+    background-color: #000000;
+    color: rgb(255, 255, 255);
 }
 
 li button:hover {
-    background: linear-gradient(135deg, #43e97b, #38f9d7);
+    background: linear-gradient(135deg, #e581e5, #9f0fff);
+    color: rgb(255, 255, 255);
     opacity: 0.9;
 }
 
@@ -157,7 +179,7 @@ li {
 
 .task-text {
     flex-grow: 5;
-    padding: 5px;
+    padding: 15px;
     font-size: 16px;
     cursor: text;
     border-radius: 5px;
@@ -165,10 +187,10 @@ li {
 }
 
 .task-text[contenteditable="true"] {
-    background-color: #e3f2fd;
-    border: 1px solid #2196F3;
+    background-color: #cdf2ff;
+    border: 1px solid #3dbeeda2;
     outline: none;
-    padding: 6px;
+    padding: 8px;
 }
 
 button {
