@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", loadTasks);
-
+document.getElementById("dueDateInput").addEventListener("click", function () {
+  this.showPicker && this.showPicker(); // modern browsers
+});
 function updateTaskCounts() {
     let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
     let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
@@ -19,34 +21,53 @@ function loadTasks() {
     let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
     let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
 
-    tasks.forEach((task, index) => {
-        let li = document.createElement("li");
-        li.innerHTML = `
-            <span class="task-text">${task.text}</span>
-            <small>${task.date}</small>
-            <button onclick="enableEdit(${index})">Edit</button>
-            <button onclick="completeTask(${index})">Complete</button>
-            <button onclick="deleteTask(${index})">Delete</button>`;
-        taskList.appendChild(li);
+  tasks.forEach((task, index) => {
+    let li = document.createElement("li");
+    li.classList.add("fade-in"); 
+    li.setAttribute("data-index", index);
+    li.innerHTML = `
+        <span class="task-text">${task.text}</span>
+        <small>Created: ${task.dateCreated}</small><br>
+        <small>Due: ${task.dueDate}</small>
+        <button onclick="enableEdit(${index})"><i class="fas fa-edit"></i>Edit</button>
+        <button onclick="completeTask(${index})"><i class="fas fa-check"></i>Complete</button>
+        <button onclick="deleteTask(${index})"><i class="fas fa-trash"></i>Delete</button>`;
+    taskList.appendChild(li);
+
+    document.querySelectorAll(".delete-btn").forEach(button => {
+    button.addEventListener("click", function () {
+        let index = this.parentElement.getAttribute("data-index");
+        deleteTask(index);
     });
+});
+
+});
+
 
     completedTasks.forEach((task, index) => {
-        let li = document.createElement("li");
-        li.innerHTML = `
-            <span class="task-text">${task.text}</span>
-            <small>${task.date}</small>
-            <button onclick="deleteCompletedTask(${index})">Remove</button>`;
-        completedTaskList.appendChild(li);
-    });
+    let li = document.createElement("li");
+    li.classList.add("fade-in"); 
+    li.innerHTML = `
+        <span class="task-text">${task.text}</span>
+        <small>Created: ${task.dateCreated}</small><br>
+        <small>Due: ${task.dueDate}</small><br>
+        <small>Completed: ${task.completedDate || "Not recorded"}</small>
+        <button onclick="deleteCompletedTask(${index})">Remove</button>`;
+    completedTaskList.appendChild(li);
+});
+
 
     updateTaskCounts();
 }
+
+
 
 function completeTask(index) {
     let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
     let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
 
     let completedTask = tasks.splice(index, 1)[0];
+    completedTask.completedDate = new Date().toLocaleString();  
     completedTasks.push(completedTask);
 
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -55,37 +76,53 @@ function completeTask(index) {
     loadTasks();
 }
 
+
+
 function deleteCompletedTask(index) {
     let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
-    completedTasks.splice(index, 1);
-    localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
-    loadTasks();
+    completedTasks.splice(index, 1); 
+    localStorage.setItem("completedTasks", JSON.stringify(completedTasks)); 
+    loadTasks(); 
 }
-
 
 // Modify addTask() and deleteTask() to call updateTaskCount()
 function addTask() {
     let taskInput = document.getElementById("taskInput");
+    let dueDateInput = document.getElementById("dueDateInput");
     let taskText = taskInput.value.trim();
+    let dueDate = dueDateInput.value;
 
     if (taskText === "") return;
 
     let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    let newTask = { text: taskText, date: new Date().toLocaleString() };
+    let newTask = {
+        text: taskText,
+        dateCreated: new Date().toLocaleString(),
+        dueDate: dueDate ? new Date(dueDate).toLocaleDateString() : "No due date"
+    };
 
     tasks.push(newTask);
     localStorage.setItem("tasks", JSON.stringify(tasks));
 
     taskInput.value = "";
+    dueDateInput.value = "";
     loadTasks();
+    
 }
 
 function deleteTask(index) {
-    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    tasks.splice(index, 1);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    loadTasks();
+    let taskList = document.getElementById("taskList");
+    let li = taskList.children[index];
+    li.classList.add("fade-out");
+
+    li.addEventListener("animationend", () => {
+        let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+        tasks.splice(index, 1);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        loadTasks();
+    });
 }
+
 function enableEdit(index) {
     let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
     let taskList = document.getElementById("taskList");
@@ -110,9 +147,12 @@ function clearAllTasks() {
 
 // Function to remove completed tasks
 function removeCompletedTasks() {
-    let completedTasks = JSON.parse(localStorage.getItem("completedTasks"));
-    localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+    localStorage.removeItem("completedTasks"); 
     loadTasks();
+}
 
-
+// Remove all
+function removeCompletedTasks() {
+    localStorage.removeItem("completedTasks");
+    loadTasks();
 }
